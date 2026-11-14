@@ -1,0 +1,95 @@
+@page "/admin/preparate"
+@model MonAmourBistro.Pages.Admin.Preparate.IndexModel
+@{
+    ViewData["Title"] = "Gestiunea meniului";
+}
+
+<partial name="_AdminTabs" />
+
+@if (!string.IsNullOrEmpty(Model.Mesaj))
+{
+    <div class="alert alert-success alert-dismissible fade show" role="status">
+        @Model.Mesaj
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Închide"></button>
+    </div>
+}
+@if (!string.IsNullOrEmpty(Model.Eroare))
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @Model.Eroare
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Închide"></button>
+    </div>
+}
+
+<div class="admin-toolbar">
+    <a href="/admin/preparate/adauga" class="btn-outline-dark-x mt-0">+ Adaugă</a>
+
+    <form method="get" class="admin-search" role="search">
+        <input type="search" name="cautare" value="@Model.Cautare" class="form-control" placeholder="Caută după denumire..." aria-label="Caută după denumire" />
+        <button type="submit" class="btn-outline-dark-x mt-0">Caută</button>
+        @if (!string.IsNullOrWhiteSpace(Model.Cautare))
+        {
+            <a href="/admin/preparate" class="admin-link">Resetează</a>
+        }
+    </form>
+</div>
+
+@if (Model.Preparate.Count == 0)
+{
+    <div class="demo-hint text-center my-4">
+        @if (string.IsNullOrWhiteSpace(Model.Cautare))
+        {
+            <span>Nu există preparate înregistrate. Apăsați „Adaugă” pentru a crea primul preparat.</span>
+        }
+        else
+        {
+            <span>Nu a fost găsit niciun preparat care să conțină „<strong>@Model.Cautare</strong>”.</span>
+        }
+    </div>
+}
+else
+{
+    <div class="table-scroll">
+        <table class="role-table admin-table">
+            <thead>
+                <tr>
+                    <th>Nr.</th>
+                    <th>Denumire</th>
+                    <th>Categorie</th>
+                    <th>Preț</th>
+                    <th>Gramaj</th>
+                    <th>Stare</th>
+                    <th>Acțiuni</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var p in Model.Preparate)
+                {
+                    <tr>
+                        <td>@p.Id</td>
+                        <td class="text-start">@p.Denumire</td>
+                        <td>@p.Categorie</td>
+                        <td>@p.Pret?.ToString("0.00") lei</td>
+                        <td>@p.Gramaj g</td>
+                        <td>
+                            @if (p.Disponibil)
+                            {
+                                <span class="yes">Disponibil</span>
+                            }
+                            else
+                            {
+                                <span class="no">Indisponibil</span>
+                            }
+                        </td>
+                        <td class="admin-actions">
+                            <a href="/admin/preparate/detalii/@p.Id">Detalii</a>
+                            <a href="/admin/preparate/editeaza/@p.Id">Editează</a>
+                            <a href="/admin/preparate/sterge/@p.Id" class="danger">Șterge</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <p class="muted text-center mt-3"><em>Total afișat: @Model.Preparate.Count preparat(e).</em></p>
+}

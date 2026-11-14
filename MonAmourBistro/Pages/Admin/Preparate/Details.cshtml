@@ -1,0 +1,28 @@
+@page "/admin/preparate/detalii/{id:int}"
+@model MonAmourBistro.Pages.Admin.Preparate.DetailsModel
+@{
+    ViewData["Title"] = "Detalii preparat";
+    var p = Model.Preparat;
+}
+
+<partial name="_AdminTabs" />
+
+<div class="admin-form-box">
+    <h2 class="info-title text-center mb-4">@p.Denumire</h2>
+    <dl class="admin-details">
+        <dt>Identificator</dt><dd>@p.Id</dd>
+        <dt>Denumire</dt><dd>@p.Denumire</dd>
+        <dt>Categorie</dt><dd>@p.Categorie</dd>
+        <dt>Descriere</dt><dd>@(string.IsNullOrWhiteSpace(p.Descriere) ? "—" : p.Descriere)</dd>
+        <dt>Preț</dt><dd>@p.Pret?.ToString("0.00") lei</dd>
+        <dt>Gramaj</dt><dd>@p.Gramaj g</dd>
+        <dt>Stare</dt>
+        <dd>@if (p.Disponibil) { <span class="yes">Disponibil în meniu</span> } else { <span class="no">Indisponibil</span> }</dd>
+    </dl>
+
+    <div class="admin-form-buttons">
+        <a href="/admin/preparate/editeaza/@p.Id" class="btn-outline-dark-x mt-0">Editează</a>
+        <a href="/admin/preparate/sterge/@p.Id" class="btn-outline-dark-x mt-0 btn-danger-x">Șterge</a>
+        <a href="/admin/preparate" class="btn-outline-dark-x mt-0 btn-cancel">Înapoi la listă</a>
+    </div>
+</div>

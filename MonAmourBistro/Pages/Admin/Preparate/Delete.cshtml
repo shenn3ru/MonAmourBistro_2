@@ -1,0 +1,27 @@
+@page "/admin/preparate/sterge/{id:int}"
+@model MonAmourBistro.Pages.Admin.Preparate.DeleteModel
+@{
+    ViewData["Title"] = "Șterge preparat";
+    var p = Model.Preparat;
+}
+
+<partial name="_AdminTabs" />
+
+<div class="admin-form-box">
+    <div class="alert alert-warning" role="alert">
+        Sigur doriți să ștergeți preparatul <strong>„@p.Denumire”</strong> (Id @p.Id)? Operația nu poate fi anulată.
+    </div>
+
+    <dl class="admin-details">
+        <dt>Identificator</dt><dd>@p.Id</dd>
+        <dt>Denumire</dt><dd>@p.Denumire</dd>
+        <dt>Categorie</dt><dd>@p.Categorie</dd>
+        <dt>Preț</dt><dd>@p.Pret?.ToString("0.00") lei</dd>
+        <dt>Gramaj</dt><dd>@p.Gramaj g</dd>
+    </dl>
+
+    <form method="post" class="admin-form-buttons">
+        <button type="submit" class="btn-outline-dark-x mt-0 bg-transparent btn-danger-x">Da, șterge</button>
+        <a href="/admin/preparate" class="btn-outline-dark-x mt-0 btn-cancel">Anulează</a>
+    </form>
+</div>

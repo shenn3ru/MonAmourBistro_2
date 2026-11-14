@@ -1,0 +1,24 @@
+﻿@{
+    var title = ViewData["Title"] as string ?? "";
+}
+
+<div class="text-center mb-5">
+    <div class="script gold">Mon Amour Bistro</div>
+    <h1 class="section-title" style="text-transform: uppercase;">@title</h1>
+</div>
+
+<div class="narrow muted text-center">
+    @if (title == "Despre noi")
+    {
+        <p>Mon Amour Bistro este un restaurant mic și primitor din Chișinău, unde bucătăria europeană se întâlnește cu ingrediente locale.</p>
+        <p>Gătim zilnic din produse proaspete și punem suflet în fiecare farfurie.</p>
+    }
+    else if (title == "Politica de confidențialitate")
+    {
+        <p>Datele introduse pe acest site (nume, telefon) sunt folosite doar pentru confirmarea rezervărilor și nu sunt transmise terților.</p>
+    }
+    else
+    {
+        <p>A apărut o problemă la afișarea paginii. Vă rugăm să reveniți la <a href="/" class="gold-link">pagina principală</a>.</p>
+    }
+</div>

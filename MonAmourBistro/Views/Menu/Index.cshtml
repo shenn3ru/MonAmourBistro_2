@@ -1,0 +1,33 @@
+﻿@model List<Preparat>
+
+<div class="text-center mb-5">
+    <div class="script gold">Descoperă</div>
+    <h1 class="section-title">MENIU</h1>
+</div>
+
+@if (Model.Count == 0)
+{
+    <p class="muted text-center">Meniul este în curs de actualizare.</p>
+}
+else
+{
+    foreach (var grupa in Model.GroupBy(p => p.Categorie))
+    {
+        <h2 class="info-title text-center mt-5 mb-3">@grupa.Key.ToUpper()</h2>
+        <div class="narrow">
+            @foreach (var p in grupa)
+            {
+                <div class="d-flex justify-content-between border-bottom py-2">
+                    <div>
+                        <strong>@p.Denumire</strong> <span class="path">@p.Gramaj g</span>
+                        @if (!string.IsNullOrWhiteSpace(p.Descriere))
+                        {
+                            <div class="muted" style="font-size:14px;line-height:1.5">@p.Descriere</div>
+                        }
+                    </div>
+                    <div class="text-nowrap ms-3">@p.Pret?.ToString("0.00") lei</div>
+                </div>
+            }
+        </div>
+    }
+}
