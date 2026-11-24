@@ -11,12 +11,7 @@ public class AccountController : Controller
         return Redirect("/autentificare");
     }
 
-    [HttpGet("/autentificare")]
-    public IActionResult Login()
-    {
-        ViewData["Title"] = "Autentificare";
-        return View();
-    }
+    // Pagina /autentificare este acum o pagină Razor: Pages/Autentificare.cshtml
 
     [HttpGet("/cont")]
     [SimAuthorize(SimRole.Client)]

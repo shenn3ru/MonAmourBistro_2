@@ -1,0 +1,85 @@
+@page "/contact"
+@model MonAmourBistro.Pages.ContactModel
+@{
+    ViewData["Title"] = "Contact";
+}
+
+<div class="text-center mb-5">
+    <div class="script gold">Scrieți-ne</div>
+    <h1 class="section-title">CONTACT</h1>
+    <p class="muted narrow">
+        Aveți o întrebare, doriți să rezervați o masă sau să organizați un eveniment?
+        Ne puteți contacta oricând, iar noi vă răspundem cât mai repede.
+    </p>
+</div>
+
+<div class="row g-4 justify-content-center text-center">
+    <div class="col-md-4">
+        <div class="info-card">
+            <h2 class="info-title">ADRESĂ</h2>
+            <p class="muted mb-0">Chișinău, Republica Moldova</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="info-card">
+            <h2 class="info-title">TELEFON</h2>
+            <p class="muted mb-0"><a href="tel:+37300000000">+373 000 00 000</a></p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="info-card">
+            <h2 class="info-title">E-MAIL</h2>
+            <p class="muted mb-0"><a href="mailto:contact@monamourbistro.md">contact@monamourbistro.md</a></p>
+        </div>
+    </div>
+</div>
+
+<div class="auth-box mt-5" style="max-width:640px">
+    <div class="text-center">
+        <div class="script gold">Trimiteți un mesaj</div>
+        <h2 class="section-title">FORMULAR DE CONTACT</h2>
+    </div>
+
+    @if (!string.IsNullOrEmpty(Model.Confirmare))
+    {
+        <div class="alert alert-success" role="status">@Model.Confirmare</div>
+    }
+
+    <p class="muted"><span class="req">*</span> câmpuri obligatorii</p>
+
+    <form method="post" class="auth-form" novalidate>
+        <div class="mb-3">
+            <label asp-for="Input.NumePrenume" class="form-label"></label> <span class="req">*</span>
+            <input asp-for="Input.NumePrenume" class="form-control" autocomplete="name" />
+            <span asp-validation-for="Input.NumePrenume" class="field-error"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Input.Email" class="form-label"></label> <span class="req">*</span>
+            <input asp-for="Input.Email" class="form-control" placeholder="nume@exemplu.md" autocomplete="email" />
+            <span asp-validation-for="Input.Email" class="field-error"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Input.Subiect" class="form-label"></label> <span class="req">*</span>
+            <input asp-for="Input.Subiect" class="form-control" />
+            <span asp-validation-for="Input.Subiect" class="field-error"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Input.Mesaj" class="form-label"></label> <span class="req">*</span>
+            <textarea asp-for="Input.Mesaj" class="form-control" rows="5"></textarea>
+            <span asp-validation-for="Input.Mesaj" class="field-error"></span>
+        </div>
+        <button type="submit" class="btn-outline-dark-x w-100 mt-2 bg-transparent">Trimite</button>
+    </form>
+</div>
+
+<div class="narrow text-center mt-5">
+    <div class="script gold">Program</div>
+    <h2 class="section-title">ORAR DE LUCRU</h2>
+    <ul class="hours-list">
+        <li><span>Luni &ndash; Vineri</span><span>10:00 &ndash; 22:00</span></li>
+        <li><span>Sâmbătă</span><span>11:00 &ndash; 23:00</span></li>
+        <li><span>Duminică</span><span>11:00 &ndash; 21:00</span></li>
+    </ul>
+    <p class="muted">Restaurantul are aproximativ 12 mese, așa că vă recomandăm să rezervați din timp.</p>
+    <a href="/rezervare" class="btn-outline-dark-x">Rezervă o masă</a>
+</div>

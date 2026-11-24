@@ -1,0 +1,38 @@
+@page "/autentificare"
+@model MonAmourBistro.Pages.AutentificareModel
+@{
+    ViewData["Title"] = "Autentificare";
+}
+
+<div class="auth-box text-center">
+    <div class="script gold">Bine ați revenit</div>
+    <h1 class="section-title">AUTENTIFICARE</h1>
+
+    @if (!string.IsNullOrEmpty(Model.Mesaj))
+    {
+        <div class="alert alert-success text-start" role="status">
+            @Model.Mesaj
+            <div class="mt-2"><a href="@Model.Continua" class="gold-link">Continuă &rarr;</a></div>
+        </div>
+    }
+
+    <form method="post" class="auth-form text-start" novalidate>
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+        <label asp-for="Input.Email" class="form-label"></label> <span class="req">*</span>
+        <input asp-for="Input.Email" class="form-control" placeholder="nume@exemplu.md" autocomplete="email" />
+        <span asp-validation-for="Input.Email" class="field-error"></span>
+
+        <label asp-for="Input.Parola" class="form-label mt-3"></label> <span class="req">*</span>
+        <input asp-for="Input.Parola" class="form-control" placeholder="Parola dvs." autocomplete="current-password" />
+        <span asp-validation-for="Input.Parola" class="field-error"></span>
+
+        <button type="submit" class="btn-outline-dark-x w-100 mt-4 bg-transparent">Autentificare</button>
+    </form>
+
+    <div class="demo-hint mt-4 text-start">
+        <strong>Simulare:</strong> orice e-mail valid și orice parolă (minim 4 caractere) vă autentifică ca <strong>Client</strong>.
+        Dacă e-mailul începe cu <strong>admin</strong> (de exemplu admin@monamourbistro.md), intrați ca <strong>Administrator</strong>.
+        <a href="/roluri" class="gold-link">Vezi rolurile și accesul</a>.
+    </div>
+</div>

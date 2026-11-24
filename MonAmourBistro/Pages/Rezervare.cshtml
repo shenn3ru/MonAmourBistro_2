@@ -1,0 +1,66 @@
+@page "/rezervare"
+@model MonAmourBistro.Pages.RezervareModel
+@{
+    ViewData["Title"] = "Rezervă o masă";
+}
+
+<div class="auth-box" style="max-width:560px">
+    <div class="text-center">
+        <div class="script gold">Seara perfectă</div>
+        <h1 class="section-title">REZERVARE</h1>
+        <p class="muted">
+            Alegeți data, ora și numărul de persoane, iar noi vă confirmăm rezervarea.
+            Restaurantul are aproximativ 12 mese, așa că vă recomandăm să rezervați din timp.
+        </p>
+    </div>
+
+    @if (!string.IsNullOrEmpty(Model.Confirmare))
+    {
+        <div class="alert alert-success" role="status">@Model.Confirmare</div>
+    }
+
+    <p class="muted"><span class="req">*</span> câmpuri obligatorii &middot; program: 10:00 – 22:00</p>
+
+    <form method="post" class="auth-form admin-form" novalidate>
+        <div class="mb-3">
+            <label asp-for="Input.Nume" class="form-label"></label> <span class="req">*</span>
+            <input asp-for="Input.Nume" class="form-control" autocomplete="name" />
+            <span asp-validation-for="Input.Nume" class="field-error"></span>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 mb-3">
+                <label asp-for="Input.Telefon" class="form-label"></label> <span class="req">*</span>
+                <input asp-for="Input.Telefon" class="form-control" placeholder="+373 000 00 000" autocomplete="tel" />
+                <span asp-validation-for="Input.Telefon" class="field-error"></span>
+            </div>
+            <div class="col-sm-6 mb-3">
+                <label asp-for="Input.Email" class="form-label"></label>
+                <input asp-for="Input.Email" class="form-control" autocomplete="email" />
+                <span asp-validation-for="Input.Email" class="field-error"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 mb-3">
+                <label asp-for="Input.Data" class="form-label"></label> <span class="req">*</span>
+                <input asp-for="Input.Data" class="form-control" />
+                <span asp-validation-for="Input.Data" class="field-error"></span>
+            </div>
+            <div class="col-sm-4 mb-3">
+                <label asp-for="Input.Ora" class="form-label"></label> <span class="req">*</span>
+                <input asp-for="Input.Ora" class="form-control" />
+                <span asp-validation-for="Input.Ora" class="field-error"></span>
+            </div>
+            <div class="col-sm-4 mb-3">
+                <label asp-for="Input.NrPersoane" class="form-label">Persoane</label> <span class="req">*</span>
+                <input asp-for="Input.NrPersoane" type="number" class="form-control" />
+                <span asp-validation-for="Input.NrPersoane" class="field-error"></span>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Input.Mentiuni" class="form-label"></label>
+            <textarea asp-for="Input.Mentiuni" class="form-control" rows="3" placeholder="Ocazie specială, alergii, preferințe de masă..."></textarea>
+            <span asp-validation-for="Input.Mentiuni" class="field-error"></span>
+        </div>
+        <button type="submit" class="btn-outline-dark-x w-100 mt-2 bg-transparent">Trimite rezervarea</button>
+    </form>
+</div>

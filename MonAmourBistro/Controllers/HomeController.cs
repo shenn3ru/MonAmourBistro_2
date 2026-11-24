@@ -26,12 +26,7 @@ public class HomeController : Controller
         return View();
     }
 
-    [HttpGet("/contact")]
-    public IActionResult Contact()
-    {
-        ViewData["Title"] = "Contact";
-        return View();
-    }
+    // Pagina /contact este acum o pagină Razor: Pages/Contact.cshtml
 
     [HttpGet("/confidentialitate")]
     public IActionResult Privacy()
